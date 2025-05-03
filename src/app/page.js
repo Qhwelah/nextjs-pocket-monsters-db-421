@@ -27,11 +27,11 @@ async function getData(){
 export default function Home() {
   return (
     <div>
-      This is the Pocket Monsters Database Homepage!
+      <h1>This is the Pocket Monsters Database Homepage!</h1>
       <br/>
-      <Link href="/monsters">Click here to the database!</Link>
+      <Link href="/monsters" class="btn light-blue">Click here to go to the database!</Link>
       <br/>
-      <button onClick={getData}>Click for data bruv</button>
+      {/* <button onClick={getData}>Click for data bruv</button> */}
     </div>
   );
 }
