@@ -1,4 +1,4 @@
-import MonstersList from "./MonsterList";
+import MonstersList from "@/app/monsters/MonsterList";
 
 const MonstersPage = () => {
     return(
