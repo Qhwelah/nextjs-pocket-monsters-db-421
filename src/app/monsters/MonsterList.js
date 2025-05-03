@@ -1,5 +1,38 @@
 import Link from "next/link";
 
+export async function getStaticPaths(){
+    let totalAmountOfMons = 1025
+    
+    if(process.env.SKIP_BUILD_STATIC_GENERATION) {
+        return {
+            paths: [],
+            fallback: 'blocking',
+        }
+    }
+    const posts = await getData(totalAmountOfMons)
+
+    let monsters = data.map((monster) => {
+        let theId = monster['url'];
+        theId = theId.substring(34, theId.length-1)
+        let theName = `${monster['name']}`
+        //console.log(`${theId} is ${monster}`)
+        return(
+            <Link key={theId} href={`/monsters/${theId}`} className={'collection-item'}>{theName}</Link>
+        );
+    });
+
+    return {monsters, fallback: false} // if the url does not exist
+}
+
+export async function generateStaticParams() {
+    let totalAmountOfMons = 1025
+    let data = await getData(totalAmountOfMons)
+    data = data['results']
+    return data.map((monster) => {return {
+        'id': monster['url'].substring(34, theId.length-1)
+    }});
+}
+
 async function getData(limit){
     const url = `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${limit}`;
     const result = await fetch(url, 
@@ -26,9 +59,11 @@ export default async function MonstersList() {
     const data = inputdata['results'];
     console.log(data);
     console.log(data[1])
-    let theIdUno = data[1]['url'];
-    theIdUno = theIdUno.substring(34, theIdUno.length-1)
-    console.log(`${theIdUno} is ${data[1]['name']}`)
+
+    // // Testing with monster id 1
+    // let theIdUno = data[1]['url'];
+    // theIdUno = theIdUno.substring(34, theIdUno.length-1)
+    // console.log(`${theIdUno} is ${data[1]['name']}`)
 
     let monsters = data.map((monster) => {
         let theId = monster['url'];

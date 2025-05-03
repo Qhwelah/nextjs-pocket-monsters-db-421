@@ -26,7 +26,7 @@ const Monster = async ({params}) => {
     return(
         <div>
             <h1>{name} - ID: {monsterId}</h1>
-            <ImageComponent src={imageUrl} fallback={oldUrl} alt={name}></ImageComponent>
+            <ImageComponent monsterName={name} alt={monsterId}></ImageComponent>
             <p>{monsterString}</p>
         </div>
     )
